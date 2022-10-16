@@ -13,7 +13,7 @@ var currentDay = document.getElementById("currentDay");
  * define functions
  */
 var renderCurrentDay = function(){
-    currentDay.textContent = "Today is " , moment().format("MMM Do YY");
+    currentDay.textContent = "Today is "+ moment().format("MMM Do YY");
 }
 
 var renderColorBlock = function(){
@@ -23,17 +23,16 @@ var renderColorBlock = function(){
     for(let i = 0; i < textAreaArr.length; i++){
         var element = textAreaArr[i];
         if(element.getAttribute("id") > currentHour){
-            // future
+            // add future style
             element.classList.add("future");
         } else if (element.getAttribute("id") == currentHour){
-            // current
+            // add present style
             element.classList.add("present");
         } else {
-            // past
+            // add past style
             element.classList.add("past");
         }
     }    
-
 }
 // TODO
 var renderSavedEvents = function(){
