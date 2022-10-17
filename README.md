@@ -28,7 +28,7 @@ WHEN I refresh the page, then the saved events persist
 * Moment.js
   
 ## Webpage snapshots
-[Screenshot:](./Assets/screenshot.png)
+[Work day scheduler](./Assets/screenshot.png)git
 
 ## License
 MIT
