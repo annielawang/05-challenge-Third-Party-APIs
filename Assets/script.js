@@ -6,10 +6,9 @@ var currentDay = document.getElementById("currentDay");
 /**
  * define functions
  */
-// Current day is displayed on the top of the webpage.
+// Current day is displayed on the top of the webpage using moment.js.
 var renderCurrentDay = function(){
-    // render current day using moment.js
-    currentDay.textContent = "Today is "+ moment().format("MMM Do YY");
+    currentDay.textContent = "Today is "+ moment().format("dddd MMM Do YY");
 }
 
 // The textarea of each time block is color coded to show if it's in the past, present or future.
@@ -30,31 +29,30 @@ var renderColorBlock = function(){
         }
     }    
 }
+
+// Get key value data from local storage, parse them and render on relevant textarea. When refreshing page, the data persist on page.
 var renderSavedEvents = function(){
-    // Get value from local storage and render on relevant textarea.
-    console.log("rednder saved events");
-    btnIdArray = [hour_9_save, hour_10_save, hour_11_save, hour_12_save, hour_13_save, hour_14_save, hour_15_save, hour_16_save, hour_17_save];
+    btnIdArray = ["hour_9_save", "hour_10_save", "hour_11_save", "hour_12_save", "hour_13_save", "hour_14_save", "hour_15_save", "hour_16_save", "hour_17_save"];
     for (let i = 0; i < btnIdArray.length; i++) {
-        const btnID = btnIdArray[i];
-        var textAreaEventObject = JSON.parse(localStorage.getItem(btnID));
-        if(textAreaEventObject !== null){
-            document.getElementById("btnID").previousElementSibling.value = textAreaEventObject.btnID;
+        var btnID = btnIdArray[i];
+        var localStorageValue = localStorage.getItem(btnID);
+        if(localStorageValue != null){
+            document.getElementById(btnID).previousElementSibling.value = localStorageValue;
         }
     }
 }
 
+// save input to local storage
 var saveEvent = function(clickId){
     // Onclick, save this button's previous sibling element value (textarea value) to local storage.
     var inputValue = document.getElementById(clickId).previousElementSibling.value;
-    localStorage.setItem(clickId, JSON.stringify(inputValue));
-    renderSavedEvents();
+    localStorage.setItem(clickId, inputValue);
 }
-
-
 
 /**
  * call functions
  */
+// When loading, current day, color coded time blocks and saved events are displayed on the webpage.
  renderCurrentDay();
  renderColorBlock();
  renderSavedEvents();
